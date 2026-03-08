@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ML & DL Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --border: #1e2d45;
+    --accent1: #4f8ef7;
+    --accent2: #a78bfa;
+    --accent3: #34d399;
+    --accent4: #fb923c;
+    --accent5: #f472b6;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --heading: #f8fafc;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: linear-gradient(135deg, #0d1b3e 0%, #0a0e1a 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,142,247,.18) 0%, transparent 70%);
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--heading);
+    letter-spacing: -1px;
+    position: relative;
+  }
+  header h1 span { color: var(--accent1); }
+  header p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 1rem;
+    position: relative;
+  }
+
+  /* ─── NAV PILLS ─── */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 24px 40px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav a {
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all .2s;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+  }
+  nav a:hover { color: var(--heading); border-color: var(--accent1); background: rgba(79,142,247,.1); }
+
+  /* ─── MAIN LAYOUT ─── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ─── TOPIC CARDS ─── */
+  .topic {
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .topic-num {
+    font-family: 'Syne', sans-serif;
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--bg);
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .topic-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--heading);
+  }
+  .topic-body { padding: 24px 28px; }
+
+  /* color variants */
+  .t1 .topic-header { background: rgba(79,142,247,.08); }
+  .t1 .topic-num { background: var(--accent1); }
+  .t1 .topic-title { color: #93c5fd; }
+
+  .t2 .topic-header { background: rgba(167,139,250,.08); }
+  .t2 .topic-num { background: var(--accent2); }
+  .t2 .topic-title { color: #c4b5fd; }
+
+  .t3 .topic-header { background: rgba(52,211,153,.08); }
+  .t3 .topic-num { background: var(--accent3); }
+  .t3 .topic-title { color: #6ee7b7; }
+
+  .t4 .topic-header { background: rgba(251,146,60,.08); }
+  .t4 .topic-num { background: var(--accent4); }
+  .t4 .topic-title { color: #fdba74; }
+
+  .t5 .topic-header { background: rgba(244,114,182,.08); }
+  .t5 .topic-num { background: var(--accent5); }
+  .t5 .topic-title { color: #f9a8d4; }
+
+  .t6 .topic-header { background: rgba(79,142,247,.08); }
+  .t6 .topic-num { background: #60a5fa; }
+  .t6 .topic-title { color: #bfdbfe; }
+
+  .t7 .topic-header { background: rgba(52,211,153,.08); }
+  .t7 .topic-num { background: #2dd4bf; }
+  .t7 .topic-title { color: #99f6e4; }
+
+  /* ─── CONTENT ELEMENTS ─── */
+  p { margin-bottom: 14px; color: #cbd5e1; }
+  p:last-child { margin-bottom: 0; }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 22px 0 8px;
+  }
+  h3:first-child { margin-top: 0; }
+
+  /* ANALOGY BOX */
+  .analogy {
+    background: rgba(79,142,247,.07);
+    border-left: 3px solid var(--accent1);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-style: italic;
+    color: #93c5fd;
+    font-size: .93rem;
+  }
+  .analogy strong { color: #bfdbfe; font-style: normal; }
+
+  /* INFO GRID */
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  @media(max-width:600px){ .grid2{ grid-template-columns:1fr; } }
+
+  .card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .card-label {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .card-val { color: var(--text); font-size: .9rem; }
+
+  /* STEP LIST */
+  .steps { list-style: none; counter-reset: step; margin: 12px 0; }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    color: #cbd5e1;
+  }
+  .steps li::before {
+    content: counter(step);
+    min-width: 24px; height: 24px;
+    background: var(--accent1);
+    color: var(--bg);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: .75rem;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* BULLET LIST */
+  .blist { list-style: none; margin: 10px 0; padding: 0; }
+  .blist li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    color: #cbd5e1;
+    font-size: .93rem;
+  }
+  .blist li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--accent3);
+    font-size: .8rem;
+    top: 8px;
+  }
+
+  /* FORMULA */
+  .formula {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: .88rem;
+    color: #86efac;
+    margin: 14px 0;
+    overflow-x: auto;
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .badge-blue  { background: rgba(79,142,247,.15); color: #93c5fd; border: 1px solid rgba(79,142,247,.3); }
+  .badge-green { background: rgba(52,211,153,.15); color: #6ee7b7; border: 1px solid rgba(52,211,153,.3); }
+  .badge-purple{ background: rgba(167,139,250,.15); color: #c4b5fd; border: 1px solid rgba(167,139,250,.3); }
+  .badge-orange{ background: rgba(251,146,60,.15);  color: #fdba74; border: 1px solid rgba(251,146,60,.3); }
+  .badge-pink  { background: rgba(244,114,182,.15); color: #f9a8d4; border: 1px solid rgba(244,114,182,.3); }
+
+  /* COMPARE TABLE */
+  .compare { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .88rem; }
+  .compare th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Syne', sans-serif;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .compare td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(30,45,69,.5);
+    color: #cbd5e1;
+    vertical-align: top;
+  }
+  .compare tr:last-child td { border-bottom: none; }
+  .compare tr:hover td { background: rgba(255,255,255,.02); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+  /* HIGHLIGHT NOTE */
+  .note {
+    background: rgba(167,139,250,.07);
+    border: 1px solid rgba(167,139,250,.2);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: .9rem;
+    color: #c4b5fd;
+  }
+  .note strong { color: var(--accent2); }
+
+  /* TYPE CARDS */
+  .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  @media(max-width:600px){ .type-grid { grid-template-columns:1fr; } }
+  .type-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .type-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: .9rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .type-card p { font-size: .87rem; margin-bottom: 0; color: #94a3b8; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+    font-size: .82rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ML & DL <span>Study Guide</span></h1>
+  <p>Unit I & II · Simple, Detailed Explanations of Every Key Topic</p>
+</header>
+
+<nav>
+  <a href="#ml-dl">ML vs DL</a>
+  <a href="#gradient">Gradient Descent</a>
+  <a href="#autoencoders">Autoencoders</a>
+  <a href="#types-ae">Types of AE</a>
+  <a href="#cnn">CNN</a>
+  <a href="#cmm">CNN Dataset</a>
+  <a href="#dnn-weights">DNN Weights</a>
+  <a href="#linear-numericals">Linear Numericals</a>
+</nav>
+
+<main>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  1. ML vs DL                                               -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section class="topic t1" id="ml-dl">
+    <div class="topic-header">
+      <div class="topic-num">1</div>
+      <div class="topic-title">Machine Learning & Deep Learning</div>
+    </div>
+    <div class="topic-body">
+
+      <h3>What is Machine Learning?</h3>
+      <p>Machine Learning (ML) is a way to make computers learn from data — without explicitly telling them every rule. Instead of programming "if X then do Y," you give the computer lots of examples and let it figure out the patterns on its own.</p>
+
+      <div class="analogy">
+        <strong>🧠 Analogy:</strong> Teaching a child to recognize cats. You don't explain "a cat has fur, whiskers, four legs…" Instead, you show them 1000 pictures of cats and 1000 pictures of dogs. Eventually they recognize cats on their own — that's ML!
+      </div>
+
+      <h3>3 Main Types of ML</h3>
+      <div class="type-grid">
+        <div class="type-card">
+          <h4 style="color:#93c5fd">📌 Supervised Learning</h4>
+          <p>Trains on <strong>labeled</strong> data (input + correct answer). Learns to predict on new data. <br><em>Example: Spam email detection</em></p>
+        </div>
+        <div class="type-card">
+          <h4 style="color:#6ee7b7">🔍 Unsupervised Learning</h4>
+          <p>Trains on <strong>unlabeled</strong> data. Finds hidden patterns or groups.<br><em>Example: Grouping customers by behavior</em></p>
+        </div>
+        <div class="type-card">
+          <h4 style="color:#fdba74">🎮 Reinforcement Learning</h4>
+          <p>Learns by <strong>trial and error</strong> — gets rewards for good actions.<br><em>Example: Training a game-playing AI</em></p>
+        </div>
+        <div class="type-card">
+          <h4 style="color:#f9a8d4">🔀 Semi-Supervised</h4>
+          <p>Mix of labeled + unlabeled data. Useful when labeling data is expensive.<br><em>Example: Medical image classification</em></p>
+        </div>
+      </div>
+
+      <h3>What is Deep Learning?</h3>
+      <p>Deep Learning (DL) is a <strong>sub-field of ML</strong> that uses multi-layered artificial neural networks (inspired by the human brain) to automatically learn features from raw data. The "deep" in deep learning refers to the many hidden layers in the network.</p>
+
+      <div class="analogy">
+        <strong>🧠 Analogy:</strong> In regular ML, a human engineer has to manually pick out features from a photo (edges, colors, shapes). In Deep Learning, the network figures out those features by itself — layer by layer, like peeling an onion.
+      </div>
+
+      <h3>ML vs Deep Learning — Quick Comparison</h3>
+      <table class="compare">
+        <tr><th>Feature</th><th>Machine Learning</th><th>Deep Learning</th></tr>
+        <tr><td>Data needed</td><td>Small to medium</td><td>Large datasets required</td></tr>
+        <tr><td>Feature extraction</td><td>Manual (by engineer)</td><td>Automatic</td></tr>
+        <tr><td>Hardware</td><td>CPU is fine</td><td>Needs GPU</td></tr>
+        <tr><td>Training time</td><td>Fast</td><td>Slow</td></tr>
+        <tr><td>Interpretability</td><td>Easier to understand</td><td>"Black box" — hard to explain</td></tr>
+        <tr><td>Best for</td><td>Structured/tabular data</td><td>Images, audio, text</td></tr>
+      </table>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  2. Gradient Descent                                        -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section class="topic t2" id="gradient">
+    <div class="topic-header">
+      <div class="topic-num">2</div>
+      <div class="topic-title">Gradient Descent</div>
+    </div>
+    <div class="topic-body">
+
+      <h3>What Problem Does It Solve?</h3>
+      <p>When training a neural network, it makes predictions and compares them to the correct answer using a <strong>Loss Function</strong> (a number that measures how wrong the model is). Gradient Descent is the algorithm that <strong>minimizes this loss</strong> — it's how the model learns and improves.</p>
+
+      <div class="analogy">
+        <strong>⛰️ Classic Analogy:</strong> Imagine you're blindfolded on a hilly mountain and you want to reach the lowest valley. You can't see far, but you can feel which direction is downhill under your feet. So you take a small step in the steepest downhill direction — then repeat. Eventually you reach the bottom (minimum loss). That's Gradient Descent!
+      </div>
+
+      <h3>How Does It Work? (Step by Step)</h3>
+      <ol class="steps">
+        <li>Start with random weights in the neural network.</li>
+        <li>Feed training data through the network to get a prediction.</li>
+        <li>Calculate the loss (how wrong the prediction is).</li>
+        <li>Compute the gradient — which direction increases the loss most.</li>
+        <li>Move in the <strong>opposite</strong> direction (downhill) by a small step.</li>
+        <li>Update the weights and repeat until loss is minimized.</li>
+      </ol>
+
+      <h3>The Learning Rate</h3>
+      <p>The "small step" size is called the <strong>Learning Rate (α)</strong>. It controls how fast or slow the model learns.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-label">Too High Learning Rate</div>
+          <div class="card-val">⚠️ Overshoots the minimum — bounces around, never converges</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Too Low Learning Rate</div>
+          <div class="card-val">🐢 Very slow — takes forever to reach the minimum</div>
+        </div>
+      </div>
+
+      <h3>The Gradient Descent Formula</h3>
+      <div class="formula">
+        new_weight = old_weight − α × gradient_of_loss
+        <br><br>
+        w = w − α · (∂L / ∂w)
+      </div>
+      <p>Where <em>α</em> is the learning rate and <em>∂L/∂w</em> is the derivative (slope) of the loss with respect to each weight.</p>
+
+      <h3>Types of Gradient Descent</h3>
+      <div class="type-grid">
+        <div class="type-card">
+          <h4 style="color:#c4b5fd">Batch GD</h4>
+          <p>Uses the <strong>entire dataset</strong> to compute one update. Accurate but slow for large data.</p>
+        </div>
+        <div class="type-card">
+          <h4 style="color:#c4b5fd">Stochastic GD (SGD)</h4>
+          <p>Uses <strong>one sample</strong> at a time. Very fast but noisy updates.</p>
+        </div>
+        <div class="type-card">
+          <h4 style="color:#c4b5fd">Mini-Batch GD</h4>
+          <p>Uses a <strong>small batch</strong> (e.g., 32 samples). Best of both worlds — most widely used.</p>
+        </div>
+        <div class="type-card">
+          <h4 style="color:#c4b5fd">Adam Optimizer</h4>
+          <p>An advanced form of GD that adapts the learning rate automatically. Very popular in practice.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Key Insight:</strong> Gradient Descent is the backbone of training <em>all</em> neural networks. Without it, neural networks cannot learn from data. It uses the <strong>backpropagation</strong> algorithm to efficiently compute gradients across all layers.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  3. Autoencoders                                            -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section class="topic t3" id="autoencoders">
+    <div class="topic-header">
+      <div class="topic-num">3</div>
+      <div class="topic-title">Autoencoders</div>
+    </div>
+    <div class="topic-body">
+
+      <h3>What Is an Autoencoder?</h3>
+      <p>An Autoencoder is a type of neural network that learns to <strong>compress data</strong> into a smaller form, and then <strong>reconstruct it</strong> back to the original. It does this completely <strong>unsupervised</strong> — no labels needed!</p>
+
+      <div class="analogy">
+        <strong>📦 Analogy:</strong> Imagine you have a massive HD photo you want to send to a friend. You compress it into a tiny zip file (encoding), send it, and your friend unzips it (decoding) to get the photo back. The autoencoder learns the best way to zip and unzip data automatically.
+      </div>
+
+      <h3>Three Main Parts</h3>
+      <div class="type-grid" style="grid-template-columns:1fr 1fr 1fr">
+        <div class="type-card" style="border-color:rgba(52,211,153,.3)">
+          <h4 style="color:#6ee7b7">🔽 Encoder</h4>
+          <p>Compresses the input into a smaller "summary" (latent space). Hidden layers shrink in size.</p>
+        </div>
+        <div class="type-card" style="border-color:rgba(251,146,60,.3)">
+          <h4 style="color:#fdba74">⚪ Bottleneck</h4>
+          <p>The middle layer — the compressed representation of the data. This is the "essence" of the input.</p>
+        </div>
+        <div class="type-card" style="border-color:rgba(79,142,247,.3)">
+          <h4 style="color:#93c5fd">🔼 Decoder</h4>
+          <p>Takes the compressed form and tries to rebuild the original input. Hidden layers grow back in size.</p>
+        </div>
+      </div>
+
+      <h3>How is it Trained?</h3>
+      <p>The autoencoder is trained by comparing its <strong>output (reconstructed data)</strong> to the <strong>original input</strong>. The goal is to minimize the <strong>reconstruction loss</strong> — the difference between what came in and what came out.</p>
+
+      <ul class="blist">
+        <li><strong>MSE (Mean Squared Error)</strong> — for continuous data like images</li>
+        <li><strong>Binary Cross-Entropy</strong> — for binary (0/1) data</li>
+      </ul>
+
+      <h3>What Are Autoencoders Used For?</h3>
+      <ul class="blist">
+        <li><strong>Dimensionality Reduction</strong> — like PCA but more powerful</li>
+        <li><strong>Noise Removal</strong> — clean up noisy images or data</li>
+        <li><strong>Anomaly Detection</strong> — find unusual patterns (fraud, defects)</li>
+        <li><strong>Data Compression</strong> — store data more efficiently</li>
+        <li><strong>Generative AI</strong> — generate new data similar to training data (VAE)</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  4. Types of Autoencoders                                  -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section class="topic t4" id="types-ae">
+    <div class="topic-header">
+      <div class="topic-num">4</div>
+      <div class="topic-title">Types of Autoencoders</div>
+    </div>
+    <div class="topic-body">
+
+      <h3>1. Denoising Autoencoder</h3>
+      <p>This type is trained with <strong>intentionally corrupted (noisy) input</strong>. The job of the network is to remove the noise and reconstruct the clean original.</p>
+      <div class="analogy">
+        <strong>🎨 Analogy:</strong> Give someone a blurry, scratched photo and ask them to restore it to the original. Over time, they get very good at fixing photos — that's a denoising autoencoder!
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="card-label">✅ Advantage</div><div class="card-val">Learns robust, meaningful features. Can be used for data augmentation.</div></div>
+        <div class="card"><div class="card-label">⚠️ Disadvantage</div><div class="card-val">Choosing the right noise level is tricky. Can lose useful original information.</div></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3>2. Sparse Autoencoder</h3>
+      <p>This autoencoder has <strong>more neurons than needed</strong>, but forces most of them to be <strong>inactive (zero)</strong> at any given time. This is called "sparsity" — only a few neurons fire for each input.</p>
+      <div class="analogy">
+        <strong>💡 Analogy:</strong> Imagine a room full of light bulbs, but only 5% are allowed to be on at any time. The network learns to pick the <em>most meaningful</em> 5% of features for each input.
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="card-label">✅ Advantage</div><div class="card-val">Filters noise, learns meaningful sparse features.</div></div>
+        <div class="card"><div class="card-label">⚠️ Disadvantage</div><div class="card-val">Sensitive to hyperparameters, higher computational cost.</div></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3>3. Variational Autoencoder (VAE)</h3>
+      <p>A VAE is a <strong>generative</strong> model. Instead of compressing data into fixed values, it learns a <strong>probability distribution</strong> (a range of possible values) in the latent space. This lets it <em>generate new data</em> that resembles the training data.</p>
+      <div class="analogy">
+        <strong>🎭 Analogy:</strong> A regular autoencoder learns "this face = these exact numbers." A VAE learns "this face = somewhere in this region of face-space." You can then sample random points from that region to generate new faces you've never seen before!
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="card-label">✅ Advantage</div><div class="card-val">Can generate new synthetic data. Great for anomaly detection and exploration.</div></div>
+        <div class="card"><div class="card-label">⚠️ Disadvantage</div><div class="card-val">Uses approximations — introduces some error. Generated samples may lack diversity.</div></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3>4. Convolutional Autoencoder</h3>
+      <p>This autoencoder uses <strong>Convolutional Neural Network (CNN) layers</strong> instead of regular dense layers. It's specifically designed for image data, since CNNs are great at understanding spatial patterns.</p>
+      <ul class="blist">
+        <li>Encoder uses Conv layers to progressively compress the image</li>
+        <li>Decoder uses transposed Conv (deconv) layers to reconstruct the image</li>
+        <li>Excellent for image denoising, compression, and inpainting</li>
+      </ul>
+
+      <div class="note">
+        <strong>Summary Table:</strong><br><br>
+        <span class="badge badge-blue">Denoising AE</span> → Remove noise from data<br>
+        <span class="badge badge-green">Sparse AE</span> → Learn key features with minimal activations<br>
+        <span class="badge badge-purple">Variational AE</span> → Generate new data (probabilistic)<br>
+        <span class="badge badge-orange">Convolutional AE</span> → Best for image data
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  5. CNN                                                     -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section class="topic t5" id="cnn">
+    <div class="topic-header">
+      <div class="topic-num">5</div>
+      <div class="topic-title">Convolutional Neural Networks (CNN)</div>
+    </div>
+    <div class="topic-body">
+
+      <h3>What is a CNN?</h3>
+      <p>A Convolutional Neural Network (CNN) is a type of deep learning model <strong>specifically designed for images</strong>. Instead of looking at the whole image at once, it scans small regions using filters (kernels) to detect features like edges, shapes, textures, and eventually full objects.</p>
+
+      <div class="analogy">
+        <strong>🔎 Analogy:</strong> Imagine reading a large painting with a magnifying glass — you scan small areas one at a time, noticing individual details (brushstrokes, colors, shapes) before putting it all together to understand the whole image. That scanning process is exactly what a CNN's convolutional layer does!
+      </div>
+
+      <h3>The 5 Layers of a CNN (Deep Convolutional Model)</h3>
+      <ol class="steps">
+        <li><strong>Convolutional Layer + ReLU</strong> — Applies filters to detect features (edges, curves). ReLU removes negative values, adding non-linearity.</li>
+        <li><strong>Pooling Layer</strong> — Shrinks the feature maps (usually max pooling) to reduce computation and retain dominant features.</li>
+        <li><strong>Fully Connected Layer</strong> — Flattens and connects all features for final classification — acts like a regular neural network.</li>
+        <li><strong>Dropout Layer</strong> — Randomly turns off some neurons during training to prevent overfitting.</li>
+        <li><strong>Activation Function Layer</strong> — Final layer that outputs the class probabilities (usually Softmax for multi-class).</li>
+      </ol>
+
+      <h3>Why Are CNNs So Powerful for Images?</h3>
+      <ul class="blist">
+        <li><strong>Local receptive fields</strong> — filters detect local patterns (edges) regardless of where they appear in the image</li>
+        <li><strong>Parameter sharing</strong> — same filter is reused across the image → far fewer parameters than a regular network</li>
+        <li><strong>Translation invariance</strong> — can recognize a cat whether it's top-left or bottom-right in the image</li>
+        <li><strong>Hierarchical features</strong> — early layers detect edges, later layers detect faces, objects</li>
+      </ul>
+
+      <h3>Famous CNN Architectures</h3>
+      <table class="compare">
+        <tr><th>Model</th><th>Year</th><th>Key Feature</th></tr>
+        <tr><td><strong>R-CNN</strong></td><td>2014</td><td>First region-based object detection. Accurate but very slow (runs 2000 CNNs per image)</td></tr>
+        <tr><td><strong>Fast R-CNN</strong></td><td>2015</td><td>Runs one CNN for whole image — much faster. Uses softmax instead of SVM</td></tr>
+        <tr><td><strong>GoogleNet</strong></td><td>2014</td><td>22 layers, "Inception" modules, only 4M parameters. Won ImageNet 2014</td></tr>
+        <tr><td><strong>VGGNet</strong></td><td>2014</td><td>16 Conv layers, simple 3×3 filters throughout. 138M parameters</td></tr>
+        <tr><td><strong>ResNet</strong></td><td>2015</td><td>152 layers with "skip connections". Beat human accuracy on ImageNet (3.57% error)</td></tr>
+      </table>
+
+      <h3>Real-World CNN Applications</h3>
+      <ul class="blist">
+        <li>Image classification (Google Photos, Instagram filters)</li>
+        <li>Object detection (self-driving cars, security cameras)</li>
+        <li>Medical imaging (detecting tumors in X-rays)</li>
+        <li>Visual search (Google Lens, Amazon product search)</li>
+        <li>Recommendation engines based on image similarity</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  6. CNN Dataset (CMM / Common Datasets)                    -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section class="topic t6" id="cmm">
+    <div class="topic-header">
+      <div class="topic-num">6</div>
+      <div class="topic-title">CNN Datasets (CIFAR, MNIST, ImageNet…)</div>
+    </div>
+    <div class="topic-body">
+
+      <h3>Why Do CNN Datasets Matter?</h3>
+      <p>CNNs are only as good as the data they're trained on. Benchmark datasets are standardized collections of labeled images used by researchers worldwide to train and compare CNN models fairly.</p>
+
+      <div class="analogy">
+        <strong>📚 Analogy:</strong> Think of these datasets as the "textbooks" for CNNs. All students (models) study from the same book, so you can fairly compare who learned better.
+      </div>
+
+      <h3>Most Important CNN Datasets</h3>
+
+      <div class="type-grid">
+        <div class="type-card" style="border-color:rgba(79,142,247,.3)">
+          <h4 style="color:#93c5fd">MNIST</h4>
+          <p>70,000 handwritten digit images (0–9). The "Hello World" of deep learning. Black & white, 28×28 pixels. Perfect for beginners.</p>
+        </div>
+        <div class="type-card" style="border-color:rgba(52,211,153,.3)">
+          <h4 style="color:#6ee7b7">CIFAR-10 / CIFAR-100</h4>
+          <p>60,000 color images (32×32). CIFAR-10 has 10 classes (cat, dog, car…). CIFAR-100 has 100 classes. Harder than MNIST.</p>
+        </div>
+        <div class="type-card" style="border-color:rgba(251,146,60,.3)">
+          <h4 style="color:#fdba74">ImageNet</h4>
+          <p>14 million+ high-res images across 20,000+ categories. The gold standard for CNN benchmarks. Home of the ImageNet Challenge (ILSVRC).</p>
+        </div>
+        <div class="type-card" style="border-color:rgba(167,139,250,.3)">
+          <h4 style="color:#c4b5fd">MS COCO</h4>
+          <p>200,000+ images with object detection, segmentation, and captions. Used for complex tasks beyond simple classification.</p>
+        </div>
+      </div>
+
+      <h3>How Are Datasets Used in CNN Training?</h3>
+      <ol class="steps">
+        <li><strong>Training Set (~70%)</strong> — The model learns from these images and their labels.</li>
+        <li><strong>Validation Set (~15%)</strong> — Used during training to tune hyperparameters and monitor performance.</li>
+        <li><strong>Test Set (~15%)</strong> — Final, unseen evaluation to measure the model's real-world performance.</li>
+      </ol>
+
+      <h3>Data Preprocessing Steps</h3>
+      <ul class="blist">
+        <li><strong>Normalization</strong> — Scale pixel values from 0–255 to 0–1 for faster training</li>
+        <li><strong>Augmentation</strong> — Flip, rotate, crop images to artificially expand the dataset</li>
+        <li><strong>Resizing</strong> — Standardize all images to the same resolution (e.g., 224×224)</li>
+        <li><strong>One-hot encoding</strong> — Convert labels to vectors (e.g., "cat" → [0,1,0,0,0])</li>
+      </ul>
+
+      <div class="note">
+        <strong>CMM Note:</strong> "CMM Dataset" in your course likely refers to the benchmark datasets used specifically in CNN labs and experiments — often CIFAR-10 or MNIST — which are the most commonly used in academic demonstrations of CNN performance.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  7. DNN Structure & Weights                                 -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section class="topic t7" id="dnn-weights">
+    <div class="topic-header">
+      <div class="topic-num">7</div>
+      <div class="topic-title">Deep Neural Network — Structure & Weights</div>
+    </div>
+    <div class="topic-body">
+
+      <h3>Structure of a Deep Neural Network</h3>
+      <p>A Deep Neural Network (DNN) is made of <strong>multiple layers of neurons</strong> stacked on top of each other. Each layer transforms data a little more, allowing the network to learn increasingly complex patterns.</p>
+
+      <div class="type-grid" style="grid-template-columns:1fr 1fr 1fr">
+        <div class="type-card" style="border-color:rgba(45,212,191,.3)">
+          <h4 style="color:#99f6e4">⬛ Input Layer</h4>
+          <p>Receives raw data (pixel values, numbers, etc.). One neuron per feature. Does <strong>no computation</strong>.</p>
+        </div>
+        <div class="type-card" style="border-color:rgba(45,212,191,.3)">
+          <h4 style="color:#99f6e4">🔲 Hidden Layers</h4>
+          <p>One or more layers between input and output. Each layer extracts more abstract features. The "deep" part!</p>
+        </div>
+        <div class="type-card" style="border-color:rgba(45,212,191,.3)">
+          <h4 style="color:#99f6e4">✅ Output Layer</h4>
+          <p>Produces the final prediction. Number of neurons = number of classes (for classification).</p>
+        </div>
+      </div>
+
+      <h3>What Are Weights?</h3>
+      <p>Weights are the <strong>learnable parameters</strong> of a neural network — the numbers that get adjusted during training to make the model better. Each connection between two neurons has one weight.</p>
+
+      <div class="analogy">
+        <strong>⚖️ Analogy:</strong> Imagine you're a judge scoring a competition with 5 criteria. You assign different <em>importance scores</em> (weights) to each criterion. A confident judge gives high weight to "skill" and low weight to "costume." The network does the same — it learns which input features matter most for predicting the output.
+      </div>
+
+      <h3>The Computation Inside a Neuron</h3>
+      <p>Each neuron performs two steps:</p>
+      <div class="formula">
+        Step 1 — Weighted sum:
+        z = w₁·x₁ + w₂·x₂ + ... + wₙ·xₙ + b
+        <br><br>
+        Step 2 — Activation function:
+        output = f(z)   ← e.g., ReLU, Sigmoid, Tanh
+      </div>
+      <p>Where <strong>w</strong> = weights, <strong>x</strong> = inputs, <strong>b</strong> = bias, <strong>f</strong> = activation function.</p>
+
+      <h3>What is a Bias?</h3>
+      <p>The bias (<strong>b</strong>) is an extra parameter added to each neuron. It lets the network shift the activation function left or right — giving it more flexibility to fit data that doesn't pass through the origin.</p>
+
+      <div class="analogy">
+        <strong>📏 Analogy:</strong> In the equation of a line y = mx + <strong>c</strong>, the constant <em>c</em> shifts the line up or down. Bias is exactly that — it shifts the decision boundary of the neuron.
+      </div>
+
+      <h3>Common Activation Functions</h3>
+      <table class="compare">
+        <tr><th>Name</th><th>Formula</th><th>Used Where?</th></tr>
+        <tr><td><strong>ReLU</strong></td><td>max(0, z)</td><td>Hidden layers — most popular, fast</td></tr>
+        <tr><td><strong>Sigmoid</strong></td><td>1 / (1 + e⁻ᶻ)</td><td>Binary output (0 or 1)</td></tr>
+        <tr><td><strong>Tanh</strong></td><td>(eᶻ − e⁻ᶻ)/(eᶻ + e⁻ᶻ)</td><td>Hidden layers, output between −1 and 1</td></tr>
+        <tr><td><strong>Softmax</strong></td><td>eᶻᵢ / Σeᶻⱼ</td><td>Multi-class output layer (probabilities)</td></tr>
+      </table>
+
+      <h3>How Weights Are Learned (Training)</h3>
+      <ol class="steps">
+        <li><strong>Initialize</strong> weights randomly (small random values).</li>
+        <li><strong>Forward Pass</strong> — feed input through the network, layer by layer, to get a prediction.</li>
+        <li><strong>Compute Loss</strong> — measure how wrong the prediction is.</li>
+        <li><strong>Backward Pass (Backpropagation)</strong> — use the chain rule to compute how much each weight contributed to the error.</li>
+        <li><strong>Update Weights</strong> using Gradient Descent: w = w − α · (∂Loss/∂w).</li>
+        <li>Repeat steps 2–5 for many epochs until loss is minimized.</li>
+      </ol>
+
+      <div class="note">
+        <strong>Key Insight:</strong> In a DNN with millions of weights (like ResNet-152), <strong>backpropagation + gradient descent</strong> adjusts every single weight simultaneously in a mathematically precise way. This is why training large models requires powerful GPUs and days or weeks of computation.
+      </div>
+
+      <h3>Overfitting vs Underfitting</h3>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-label">Underfitting</div>
+          <div class="card-val">Model is too simple — doesn't learn enough from training data. High error on both train and test sets.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Overfitting</div>
+          <div class="card-val">Model memorizes training data but fails on new data. Low train error, high test error. Fix: Dropout, Regularization.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  8. Linear Classifier Numericals                           -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section class="topic t2" id="linear-numericals">
+    <div class="topic-header">
+      <div class="topic-num">8</div>
+      <div class="topic-title">Linear Classifiers — Numericals</div>
+    </div>
+    <div class="topic-body">
+
+      <h3>Quick Recap: How a Linear Classifier Works</h3>
+      <p>A linear classifier makes predictions using a weighted sum of input features plus a bias:</p>
+      <div class="formula">
+        z = w₁·x₁ + w₂·x₂ + ... + wₙ·xₙ + b
+        <br><br>
+        If z ≥ 0  →  Class +1  (Positive class)
+        If z &lt; 0  →  Class −1  (Negative class)
+      </div>
+      <p>The <strong>decision boundary</strong> is the line/plane where z = 0 exactly — neither class, right on the border.</p>
+
+      <div class="divider"></div>
+
+      <!-- ── Numerical 1 ── -->
+      <h3>📝 Numerical 1 — Classify a Point</h3>
+
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-label">Question</div>
+        <div class="card-val">
+          A linear classifier is defined as:<br><br>
+          <strong>z = 2x₁ − x₂ − 3</strong><br><br>
+          Classify the data point &nbsp;<strong>(x₁, x₂) = (2, 4)</strong>
+        </div>
+      </div>
+
+      <h3>Solution — Step by Step</h3>
+      <ol class="steps">
+        <li>
+          <div>
+            <strong>Write down the classifier formula:</strong>
+            <div class="formula">z = 2x₁ − 1·x₂ − 3</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Substitute the values x₁ = 2, x₂ = 4:</strong>
+            <div class="formula">z = 2(2) − 1(4) − 3</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Perform the arithmetic:</strong>
+            <div class="formula">z = 4 − 4 − 3 = <span style="color:#f472b6">−3</span></div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Apply the decision rule:</strong>
+            <div class="formula">z = −3  &lt;  0   →   Class = <span style="color:#f472b6">−1</span>  (Negative class)</div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>✅ Answer:</strong> The point (2, 4) is classified as <strong>Class −1</strong>, because plugging in the values gives z = −3, which is less than 0.
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ── Numerical 2 ── -->
+      <h3>📝 Numerical 2 — Find the Decision Boundary</h3>
+
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-label">Question</div>
+        <div class="card-val">
+          For the classifier:<br><br>
+          <strong>z = x₁ + 2x₂ − 4</strong><br><br>
+          Find the <strong>decision boundary equation</strong>.
+        </div>
+      </div>
+
+      <h3>Solution — Step by Step</h3>
+      <ol class="steps">
+        <li>
+          <div>
+            <strong>Understand what "decision boundary" means:</strong><br>
+            The decision boundary is the line where the classifier is exactly on the fence — z = 0. Points on one side are Class +1, points on the other are Class −1.
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Set z = 0 in the classifier equation:</strong>
+            <div class="formula">x₁ + 2x₂ − 4 = 0</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Rearrange into a clean line equation:</strong>
+            <div class="formula">x₁ + 2x₂ = 4</div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>✅ Answer:</strong> The decision boundary is the straight line &nbsp;<strong>x₁ + 2x₂ = 4</strong>. Any point on this line gives z = 0 (on the boundary). Points where x₁ + 2x₂ &gt; 4 → Class +1; points where x₁ + 2x₂ &lt; 4 → Class −1.
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ── Numerical 3 (Extra) ── -->
+      <h3>📝 Numerical 3 — Verify Multiple Points</h3>
+
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-label">Question</div>
+        <div class="card-val">
+          Using &nbsp;<strong>z = x₁ + 2x₂ − 4</strong>, classify these three points:<br><br>
+          A = (0, 0) &nbsp;&nbsp; B = (2, 1) &nbsp;&nbsp; C = (4, 2)
+        </div>
+      </div>
+
+      <h3>Solution</h3>
+      <table class="compare">
+        <tr><th>Point</th><th>Calculation</th><th>z value</th><th>Class</th></tr>
+        <tr>
+          <td><strong>A = (0, 0)</strong></td>
+          <td>z = 0 + 2(0) − 4</td>
+          <td style="color:#f472b6"><strong>−4</strong></td>
+          <td><span class="badge badge-pink">Class −1</span></td>
+        </tr>
+        <tr>
+          <td><strong>B = (2, 1)</strong></td>
+          <td>z = 2 + 2(1) − 4</td>
+          <td style="color:#94a3b8"><strong>0</strong></td>
+          <td><span class="badge badge-purple">On Boundary</span></td>
+        </tr>
+        <tr>
+          <td><strong>C = (4, 2)</strong></td>
+          <td>z = 4 + 2(2) − 4</td>
+          <td style="color:#6ee7b7"><strong>+4</strong></td>
+          <td><span class="badge badge-green">Class +1</span></td>
+        </tr>
+      </table>
+
+      <div class="note">
+        <strong>Observation:</strong> Point B lands <em>exactly on</em> the decision boundary (z = 0). In practice, the classifier may assign it to either class depending on the convention used (z ≥ 0 → +1 means B goes to Class +1).
+      </div>
+
+      <div class="divider"></div>
+
+      <h3>🧠 Key Formulas to Remember</h3>
+      <div class="formula">
+        General linear classifier:
+        z = w₁x₁ + w₂x₂ + b
+        <br><br>
+        Decision rule:
+        z ≥ 0  →  Class +1
+        z &lt;  0  →  Class −1
+        <br><br>
+        Decision boundary:
+        Set z = 0  →  w₁x₁ + w₂x₂ + b = 0
+      </div>
+
+      <h3>Exam Tip — How to Approach Any Linear Classifier Numerical</h3>
+      <ol class="steps">
+        <li>Write out the classifier formula clearly.</li>
+        <li>If classifying a point → substitute x₁, x₂ values and compute z.</li>
+        <li>If finding boundary → set z = 0 and rearrange the equation.</li>
+        <li>Apply the decision rule: z ≥ 0 is Class +1, z &lt; 0 is Class −1.</li>
+      </ol>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Study Guide generated from Unit I & Unit II slides · ML & Deep Learning Course
+</footer>
+
+</body>
+</html>
